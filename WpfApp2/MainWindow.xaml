@@ -1,0 +1,23 @@
+﻿<Window x:Class="WpfApp2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp2"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" ResizeMode="NoResize" >
+    <Window.Resources>
+        <local:Session1_XXDataSet x:Key="session1_XXDataSet"/>
+        <CollectionViewSource x:Key="usersViewSource" Source="{Binding Users, Source={StaticResource session1_XXDataSet}}"/>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource usersViewSource}">
+        <Image Margin="260,36,233,306" Source="/DS2017_TP09_color.png" Stretch="Fill"/>
+        <Label Content="UserName" HorizontalAlignment="Left" Margin="297,188,0,0" VerticalAlignment="Top" Height="28" Width="82"/>
+        <TextBox x:Name="UserName" HorizontalAlignment="Left" Margin="412,193,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" Width="120"/>
+        <Label Content="Password" HorizontalAlignment="Left" Margin="297,226,0,0" VerticalAlignment="Top" Height="28" Width="82"/>
+        <TextBox Name="Password" HorizontalAlignment="Left" Margin="412,231,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" Width="120"/>
+        <Button Content="Login" HorizontalAlignment="Left" Margin="297,298,0,0" VerticalAlignment="Top" Height="30" Width="95" Click="Button_Click"/>
+        <Button Content="Exit" HorizontalAlignment="Left" Margin="437,298,0,0" VerticalAlignment="Top" Height="30" Width="95"/>
+
+    </Grid>
+</Window>
