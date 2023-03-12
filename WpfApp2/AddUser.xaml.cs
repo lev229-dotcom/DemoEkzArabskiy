@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfApp2.AppDataFile;
 using WpfApp2.Session1_XXDataSetTableAdapters;
 
 namespace WpfApp2
@@ -43,7 +44,21 @@ namespace WpfApp2
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            session1_XXDataSetUsersTableAdapter.InsertQuery(1, EmailText.Text, Password.Text, FirstName.Text, LastName.Text, (int)officesComboBox.SelectedValue, BirthDate.Text, true);
+           // session1_XXDataSetUsersTableAdapter.InsertQuery(1, EmailText.Text, Password.Text, FirstName.Text, LastName.Text, (int)officesComboBox.SelectedValue, BirthDate.Text, true);
+            var user = new Users()
+            {
+                RoleID = 1,
+                Email = EmailText.Text,
+                Password = Password.Text,
+                FirstName = FirstName.Text,
+                LastName = LastName.Text,
+                OfficeID = (int)officesComboBox.SelectedValue,
+                Birthdate = BirthDate.SelectedDate,
+                Active = true,
+            };
+            ConnectOdb.conObj.Users.Add(user);
+            ConnectOdb.conObj.SaveChanges();
+            MessageBox.Show("Uspex");
         }
     }
 }

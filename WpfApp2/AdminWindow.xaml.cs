@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfApp2.AppDataFile;
 
 namespace WpfApp2
 {
@@ -26,13 +27,14 @@ namespace WpfApp2
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            usersDataGrid.ItemsSource = ConnectOdb.conObj.Users.ToList();
 
-            WpfApp2.Session1_XXDataSet session1_XXDataSet = ((WpfApp2.Session1_XXDataSet)(this.FindResource("session1_XXDataSet")));
-            // Загрузить данные в таблицу Users. Можно изменить этот код как требуется.
-            WpfApp2.Session1_XXDataSetTableAdapters.UsersTableAdapter session1_XXDataSetUsersTableAdapter = new WpfApp2.Session1_XXDataSetTableAdapters.UsersTableAdapter();
-            session1_XXDataSetUsersTableAdapter.Fill(session1_XXDataSet.Users);
-            System.Windows.Data.CollectionViewSource usersViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("usersViewSource")));
-            usersViewSource.View.MoveCurrentToFirst();
+            //WpfApp2.Session1_XXDataSet session1_XXDataSet = ((WpfApp2.Session1_XXDataSet)(this.FindResource("session1_XXDataSet")));
+            //// Загрузить данные в таблицу Users. Можно изменить этот код как требуется.
+            //WpfApp2.Session1_XXDataSetTableAdapters.UsersTableAdapter session1_XXDataSetUsersTableAdapter = new WpfApp2.Session1_XXDataSetTableAdapters.UsersTableAdapter();
+            //session1_XXDataSetUsersTableAdapter.Fill(session1_XXDataSet.Users);
+            //System.Windows.Data.CollectionViewSource usersViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("usersViewSource")));
+            //usersViewSource.View.MoveCurrentToFirst();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -40,6 +42,11 @@ namespace WpfApp2
             var window = new AddUser();
             window.Show();
             this.Close();
+        }
+
+        private void Test_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(((sender as Button).DataContext as Users).Email);
         }
     }
 }
